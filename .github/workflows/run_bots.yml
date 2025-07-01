@@ -2,8 +2,8 @@ name: Run KuCoin Bots
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Chạy mỗi 10 phút
-  workflow_dispatch:        # Cho phép chạy thủ công
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   run:
@@ -24,9 +24,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run KuCoin Scanner
-      working-directory: ./scanner
-      run: python kucoin_scanner.py
+      run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)
+        python scanner/kucoin_scanner.py
 
     - name: Run KuCoin Watcher
-      working-directory: ../watcher
-      run: python kucoin_whale_watcher.py
+      run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)
+        python watcher/kucoin_whale_watcher.py
