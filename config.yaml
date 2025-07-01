@@ -1,0 +1,14 @@
+
+kucoin:
+  api_key: "683032fabb563f000127340d"
+  api_secret: "e3b3f5f5-e3f7-497d-ab5b-d8ae7c65e9a7"
+  api_passphrase: "1001HeoU@#"
+
+scanner:
+  volume_threshold: 2.0
+  price_change_percent: 5.0
+  quote_currency: ["USDT"]
+
+watcher:
+  token_watchlist: ["ETH", "BTC", "SOL", "ARB"]
+  min_transfer_usd: 10000

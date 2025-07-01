@@ -1,0 +1,5 @@
+
+kucoin-python
+pyyaml
+pandas
+requests
