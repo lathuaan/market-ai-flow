@@ -1,23 +1,32 @@
-
 name: Run KuCoin Bots
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
-  workflow_dispatch:
+    - cron: '*/10 * * * *'  # Chạy mỗi 10 phút
+  workflow_dispatch:        # Cho phép chạy thủ công
 
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Python
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+
     - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run Scanner
-      run: python scanner/kucoin_scanner.py
-    - name: Run Watcher
-      run: python watcher/kucoin_whale_watcher.py
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run KuCoin Scanner
+      working-directory: ./scanner
+      run: python kucoin_scanner.py
+
+    - name: Run KuCoin Watcher
+      working-directory: ../watcher
+      run: python kucoin_whale_watcher.py
